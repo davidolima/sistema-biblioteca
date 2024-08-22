@@ -1,26 +1,55 @@
 import java.util.ArrayList;
 
 public class Livro {
-    public static int idCounter = 0;
+    public static int idCounter = -1;
 
     public int id;
     public String titulo;
+    public String editora;
     public int edicao;
     public int anoPublicacao;
-    public ArrayList<String> autores;
+    public String autores[];
+    public ArrayList<Exemplar> exemplares;
 
-    public static void increaseID(){
+    public static int increaseID(){
         Livro.idCounter += 1;
+        return Livro.idCounter;
     }
 
-    public Livro (String titulo, int edicao, int anoPublicacao, ArrayList<String> autores){
+    public Livro (int id, String titulo, int edicao, String editora, int anoPublicacao, String autores[]){
+        this.id = id;
         this.titulo = titulo;
         this.edicao = edicao;
+        this.editora = editora;
         this.anoPublicacao = anoPublicacao;
         this.autores = autores;
+        this.exemplares = new ArrayList<Exemplar>();
+    }
 
-        this.id = idCounter;
-        Livro.increaseID();
+    public Livro (String titulo, int edicao, String editora, int anoPublicacao, String autores[]){
+        this(increaseID(), titulo, edicao, editora, anoPublicacao, autores);
+    }
+
+    public void adicionarExemplar() {
+        Exemplar newExemplar = new Exemplar();
+        this.exemplares.add(newExemplar);
+    }
+
+    public void removerExemplar(int codigoExemplar) {
+        for (Exemplar exemplar : this.exemplares){
+            if (exemplar.getId() == codigoExemplar) {
+                this.exemplares.remove(exemplar);
+            }
+        }
+    }
+
+    public boolean isThereExemplarAvailable(){
+        for (Exemplar exemplar : this.exemplares) {
+            if (exemplar.isDisponivel()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getId() {
@@ -31,6 +60,10 @@ public class Livro {
         return titulo;
     }
 
+    public String getEditora() {
+        return editora;
+    }
+
     public int getEdicao() {
         return edicao;
     }
@@ -39,7 +72,7 @@ public class Livro {
         return anoPublicacao;
     }
 
-    public ArrayList<String> getAutores() {
+    public String[] getAutores() {
         return autores;
     }
 }

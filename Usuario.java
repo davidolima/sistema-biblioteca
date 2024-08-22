@@ -21,19 +21,19 @@ public abstract class Usuario {
         return !this.isDevedor();
     }
 
-    public void pegarEmprestimo(Livro livro) {
+    public void pegarEmprestimo(Exemplar exemplar) {
         if (!this.isElegivelEmprestimo()) {
             return; // TODO: Notificar sistema da falha.
         }
 
-        Emprestimo emprestimo = new Emprestimo(this, livro);
+        Emprestimo emprestimo = new Emprestimo(this, exemplar);
         this.emprestimos.add(emprestimo);
         // TODO: Notificar sistema do sucesso.
     }
 
-    public void devolverEmprestimo(Livro livro){
+    public void devolverEmprestimo(int codigoExemplar){
         for (Emprestimo emprestimo : this.emprestimos) {
-            if (emprestimo.getItemId() == livro.getId()){
+            if (emprestimo.getExemplarId() == codigoExemplar){
                 emprestimo.finalizar();
                 return; // TODO: Notificar sistema do sucesso
             }

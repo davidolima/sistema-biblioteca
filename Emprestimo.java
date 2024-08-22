@@ -1,17 +1,15 @@
 import java.time.LocalDate;
 
-import jdk.jshell.Snippet.Status;
-
 public class Emprestimo {
     public Usuario usuario;
-    public Livro item; // interface IEmprestavel?
+    public Exemplar exemplar; // interface IEmprestavel?
     public LocalDate inicio;
     public LocalDate fim;
     public StatusEmprestimo status;
 
-    public Emprestimo(Usuario usuario, Livro item){
+    public Emprestimo(Usuario usuario, Exemplar exemplar){
         this.usuario = usuario;
-        this.item = item;
+        this.exemplar = exemplar;
 
         this.inicio = LocalDate.now();
         this.fim = inicio.plusDays(usuario.getTempoEmprestimoDias());
@@ -29,16 +27,16 @@ public class Emprestimo {
         return usuario;
     }
 
-    public Livro getItem() {
-        return item;
+    public Exemplar getExemplar() {
+        return exemplar;
     }
 
-    public int getItemId(){
-        return item.getId();
+    public int getExemplarId(){
+        return exemplar.getId();
     }
 
-    public void setItem(Livro newItem) {
-        this.item = newItem;
+    public void setExemplar(Exemplar newExemplar) {
+        this.exemplar = newExemplar;
     }
 
     public LocalDate getInicio() {
