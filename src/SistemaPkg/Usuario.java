@@ -1,7 +1,9 @@
+package SistemaPkg;
+
 import java.util.ArrayList;
 
 public abstract class Usuario {
-    public int ID;
+    public int Id;
     public String nome;
     public int tempoEmprestimoDias;
     public ArrayList<Emprestimo> emprestimos;
@@ -43,5 +45,8 @@ public abstract class Usuario {
 
     public int getTempoEmprestimoDias() {
         return this.tempoEmprestimoDias;
+    }
+    public int getId() {
+        return Id;
     }
 }

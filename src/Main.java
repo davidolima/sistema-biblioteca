@@ -1,17 +1,20 @@
-import java.util.ArrayList;
+import SistemaPkg.*;
 
-public class Sistema {
-    private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    private ArrayList<Livro> livros = new ArrayList<Livro>();
-
+public class Main {
     public static void main(String args[]){
+        Sistema sys = new Sistema();
+        Repositorio repo = new Repositorio();
 
-        String autores[] = {"Ian Sommervile"};
-        Livro l1 = new Livro("Engenharia de Software", 6, "AddisonWesley", 2000, autores);
+        Livro l1 = new Livro(100,"Engenharia de Software", 6, "AddisonWesley", 2000, new String[]{"Ian Sommervile"});
+        l1.adicionarExemplar();
+        l1.adicionarExemplar();
+        repo.addLivro(l1);
 
-        l1.adicionarExemplar();
-        l1.adicionarExemplar();
-        l1.adicionarExemplar();
+        Usuario grad1 = new AlunoGrad(123, "João da Silva");
+        Usuario grad2 = new AlunoGrad(789, "Pedro Paulo");
+
+        repo.addUsuario(grad1);
+        repo.addUsuario(grad2);
 
         // Livro l2 = new Livro(titulo, edicao, anoPublicacao, autores);
         // Livro l3 = new Livro(titulo, edicao, anoPublicacao, autores);
@@ -21,7 +24,5 @@ public class Sistema {
         // Livro l6 = new Livro(titulo, edicao, anoPublicacao, autores);
         // Livro l7 = new Livro(titulo, edicao, anoPublicacao, autores);
         // Livro l8 = new Livro(titulo, edicao, anoPublicacao, autores);
-
     }
-
 }
