@@ -1,26 +1,30 @@
 package Command;
+import Sistema.Logger;
 import Sistema.Repositorio;
 import Sistema.Livro;
 import Sistema.Usuario;
 
 public class DevolverCommand implements Command {
     @Override
-    public String run(Argumentos args){
-        String[] argumentos = args.getArgumentos();
-        int codUsuario = Integer.parseInt(argumentos[0]);
-        int codLivro = Integer.parseInt(argumentos[1]);
+    public boolean run(String[] args){
+        int codUsuario = Integer.parseInt(args[0]);
+        int codLivro = Integer.parseInt(args[1]);
         Repositorio repo = Repositorio.getInstancia();
 
         Usuario usuario = repo.buscaUsuarioPorCodigo(codUsuario);
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
 
         if (usuario == null) {
-            return "Nao existe usuario de codigo `" + codUsuario + "`";
+            Logger.logFalha("Nao existe usuario de codigo `" + codUsuario + "`.");
+            return false;
         }
         if (livro == null) {
-            return "Nao existe livro de codigo `" + codLivro + "`";
+            Logger.logFalha("Nao existe livro de codigo `" + codLivro + "`.");
+            return false;
         }
 
-        return usuario.devolverEmprestimo(livro);
+        usuario.devolverEmprestimo(livro);
+        Logger.logSucesso("Usuario `" + usuario.getNome() + "` devolveu seu exemplar do livro `" + livro.getTitulo() + "` com sucesso.");
+        return true;
     }
 }

@@ -1,16 +1,19 @@
 package Command;
 import Sistema.Repositorio;
 import Sistema.Livro;
+import Sistema.Logger;
 
 public class ConsultarLivroCommand implements Command {
     @Override
-    public String run(Argumentos args){
-        int codLivro = Integer.parseInt(args.getArgumentos()[0]);
+    public boolean run(String[] args){
+        int codLivro = Integer.parseInt(args[0]);
         Repositorio repo = Repositorio.getInstancia();
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
         if (livro == null) {
-            return "Livro de codigo `" + codLivro + "` nao encontrado"; //TODO: Unificar mensagens numa classe `Logger`
+            Logger.logFalha("Nao existe livro de codigo `" + codLivro + "`.");
+            return false;
         }
-        return livro.toString();
+        livro.imprimirInfo();
+        return true;
     }
 }
