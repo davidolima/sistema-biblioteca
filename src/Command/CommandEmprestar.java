@@ -22,8 +22,11 @@ public class CommandEmprestar implements Command {
             Logger.logFalha("Nao existe livro de codigo `" + codLivro + "`");
             return false;
         }
-
+        if (!usuario.pegarEmprestimo(livro)) {
+            return false;
+        }
+        Logger.logDebug("Qtd Livros Indisp:"+livro.getContagemExemplaresIndisponiveis());
         Logger.logSucesso("Usuario `" + usuario.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
-        return usuario.pegarEmprestimo(livro);
+        return true;
     }
 }

@@ -10,7 +10,7 @@ public class Exemplar {
     public Exemplar(int livroId){
         this.exemplarId = incrementarId();
         this.livroId = livroId;
-        this.status = StatusExemplar.DISPONIVEL;
+        this.status = StatusExemplar.DISPONIVEL; // TODO: Mudar para parâmetro que guarda quem pegou emprestado
     }
 
     public int incrementarId(){
@@ -27,21 +27,21 @@ public class Exemplar {
     }
 
     public boolean isDisponivel(){
-        return (this.status != StatusExemplar.EMPRESTADO && this.status != StatusExemplar.INDISPONIVEL);
+        return (getStatus() != StatusExemplar.EMPRESTADO);
     }
 
-    public boolean isReservado(){
-        return (this.status == StatusExemplar.RESERVADO);
-    }
-
-    public void reservar() {
-        this.status = StatusExemplar.RESERVADO;
-    }
     public void devolver() {
         this.status = StatusExemplar.DISPONIVEL;
     }
     public void pegarEmprestado(){
         this.status = StatusExemplar.EMPRESTADO;
+    }
+
+    public String toString(){
+        if (getStatus() == StatusExemplar.EMPRESTADO){
+            return "Exemplar #" + getId() + " - " + "Em empréstimo (UsuarioQuePegouEmprestado) - Inicio: <inicio> Fim: <fim>"; // Fixme
+        }
+        return "Exemplar #" + getId() + " - " + getStatus();
     }
 
     public int getLivroId(){

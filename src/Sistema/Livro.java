@@ -3,6 +3,7 @@ package Sistema;
 import Sistema.Usuario.UsuarioProfessor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Livro implements IObservavel {
     public int id;
@@ -31,11 +32,11 @@ public class Livro implements IObservavel {
             return null;
         }
 
+        exemplar.pegarEmprestado();
         if (this.getContagemExemplaresIndisponiveis() >= 2) {
             this.notificarObservadores();
         }
 
-        exemplar.pegarEmprestado();
         return exemplar;
     }
 
@@ -70,13 +71,14 @@ public class Livro implements IObservavel {
     }
 
     public void imprimirInfo(){
-        Logger.logInfo("Informações do Livro #" + getId() + " - `" + getTitulo() + "`:");
-        Logger.logInfo("  ID: " + getId());
-        Logger.logInfo("  Titulo: " + getTitulo());
-        Logger.logInfo("  Editora: " + getEditora());
-        Logger.logInfo("  Edicao: " + getEdicao());
-        Logger.logInfo("  Ano de Publicacao: " + getAnoPublicacao());
-        Logger.logInfo("  Autores: " + getAutores());
+        Logger.logInfo("Informações do Livro #" + getId() + ":");
+        Logger.logInfo(" - Título: " + getTitulo());
+        //Logger.logInfo("  Qtd. Reservas:", getContagemExemplaresReservados()); // TODO
+        Logger.logInfo(" + Exemplares: ");
+        for (Exemplar exemplar : this.exemplares){
+            Logger.logInfo("  - "+exemplar.toString());
+        }
+
     }
 
     public IObservador buscarObservador(IObservador observador) {

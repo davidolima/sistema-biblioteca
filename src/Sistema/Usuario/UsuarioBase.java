@@ -42,8 +42,7 @@ public abstract class UsuarioBase {
 
         Emprestimo emprestimo = new Emprestimo(this, livro, exemplar);
         this.emprestimos.add(emprestimo);
-        Logger.logSucesso("Usuario `" + this.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
-        return true;
+       return true;
     }
 
     public boolean devolverEmprestimo(Livro livro){
@@ -53,7 +52,6 @@ public abstract class UsuarioBase {
             return false;
         }
         emprestimo.finalizar();
-        Logger.logSucesso("Usuario `" + getNome() + "` devolveu o livro `" + livro.getTitulo() + "` com sucesso.");
         return true;
     };
 
@@ -72,7 +70,7 @@ public abstract class UsuarioBase {
         Logger.logInfo("  Nome: " + getNome());
         Logger.logInfo("Emprestimos Realizados:");
         for (Emprestimo emprestimo : emprestimos) {
-            Logger.logInfo("  " + emprestimo.toString()); // TODO: Alterar para ficar conforme roteiro.
+            Logger.logInfo("  " + emprestimo.toString());
         }
     }
 

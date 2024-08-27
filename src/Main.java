@@ -15,6 +15,16 @@ public class Main {
         String inputLine, comando;
         String[] argumentos;
 
+        if (sistema.isDebugging()){
+            sistema.executarComando("obs", new String[]{"100", "100"});
+            sistema.executarComando("emp", new String[]{"123", "100"});
+            sistema.executarComando("emp", new String[]{"456", "100"});
+            sistema.executarComando("liv", new String[]{"100"});
+            sistema.executarComando("usu", new String[]{"123"});
+            sistema.executarComando("usu", new String[]{"456"});
+            sistema.executarComando("ntf", new String[]{"100"});
+        }
+
         Logger.logInfo("Sistema de Biblioteca");
         Logger.logInfo("Grupo: David Lima e João Soares");
         boolean running = true;
