@@ -1,22 +1,39 @@
 import Sistema.*;
-import Sistema.Usuario.UsuarioBase;
-import Sistema.Usuario.UsuarioBase.AlunoGrad;
+import Sistema.Usuario.*;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]){
-        Sistema sys = Sistema.getInstancia();
+        Sistema sistema = Sistema.getInstancia();
         Repositorio repo = Repositorio.getInstancia();
 
-        Livro l1 = new Livro(100,"Engenharia de Software", 6, "AddisonWesley", 2000, new String[]{"Ian Sommervile"});
-        repo.addLivro(l1);
-        repo.addLivro(l1);
+        //sistema.toggleDebug();
+        repo.carregarDadosDeTeste();
 
-        UsuarioBase grad1 = new AlunoGrad(123, "João da Silva");
-        UsuarioBase grad2 = new AlunoGrad(789, "Pedro Paulo");
+        Scanner input = new Scanner(System.in);
+        String inputLine, comando;
+        String[] argumentos;
 
-        repo.addUsuario(grad1);
-        repo.addUsuario(grad2);
-
-        sys.executarComando("liv", new String[] {"100"});
+        Logger.logInfo("Sistema de Biblioteca");
+        Logger.logInfo("Grupo: David Lima e João Soares");
+        boolean running = true;
+        while (running){
+            System.out.print(" > ");
+            inputLine = input.nextLine();
+            comando = inputLine.substring(0,3);
+            Logger.logDebug("Comando: " + comando);
+            if (comando.equals("sai")){
+                running = false;
+                Logger.logAviso("Encerrado sistema.");
+                continue;
+            }
+            argumentos = inputLine.substring(4).split(" ");
+            Logger.logDebug("Argumentos: ");
+            for (int i = 0; sistema.isDebugging() && i < argumentos.length; i++){
+                Logger.logDebug("  "+ (i+1) + ". " + argumentos[i]);
+            }
+            sistema.executarComando(comando, argumentos);
+        }
     }
 }

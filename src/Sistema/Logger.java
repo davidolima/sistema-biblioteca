@@ -17,4 +17,9 @@ public class Logger {
         System.err.println("[ERRO FATAL] " + message);
         System.exit(1);
     }
+    public static void logDebug(String message){
+        if (Sistema.getInstancia().isDebugging()){
+            System.out.println("[DEBUG] " + message);
+        }
+    }
 }

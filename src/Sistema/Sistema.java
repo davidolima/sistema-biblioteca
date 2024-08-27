@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 public class Sistema {
     private static Sistema instance;
+    private boolean debugging = false;
     private HashMap<String, Command> comandos = new HashMap<String, Command>();
 
     public Sistema() {
@@ -29,5 +30,13 @@ public class Sistema {
     public static Sistema getInstancia() {
         if (instance == null) { instance = new Sistema(); }
         return instance;
+    }
+
+    public void toggleDebug(){
+        this.debugging = !this.debugging;
+    }
+
+    public boolean isDebugging() {
+        return debugging;
     }
 }

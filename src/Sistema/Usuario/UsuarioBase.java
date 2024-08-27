@@ -66,7 +66,7 @@ public abstract class UsuarioBase {
     }
 
     public void imprimirInfo(){
-        Logger.logInfo("Informações do Usuário #" + getId() + " - " + getNome());
+        Logger.logInfo("Informações do Usuário #" + getId() + " - `" + getNome() + "`:");
         Logger.logInfo("  ID: " + getId());
         Logger.logInfo("  Nome: " + getNome());
         Logger.logInfo("Emprestimos Realizados:");
@@ -76,7 +76,7 @@ public abstract class UsuarioBase {
     }
 
     public int getTempoEmprestimoDias() {
-        return this.tempoEmprestimoDias;
+        return this.maxTempoEmprestimoDias;
     }
     public int getId() {
         return Id;

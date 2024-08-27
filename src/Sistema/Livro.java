@@ -44,7 +44,7 @@ public class Livro extends ObservavelBase{
     }
 
     public void imprimirInfo(){
-        Logger.logInfo("Informações do Livro `" + getId() + "` - " + getTitulo());
+        Logger.logInfo("Informações do Livro #" + getId() + " - `" + getTitulo() + "`:");
         Logger.logInfo("  ID: " + getId());
         Logger.logInfo("  Titulo: " + getTitulo());
         Logger.logInfo("  Editora: " + getEditora());
