@@ -1,9 +1,7 @@
 package Sistema.Usuario;
-
 import Sistema.Livro;
 
 public class UsuarioAlunoGrad extends UsuarioBase {
-    public int maxEmprestimosEmAberto;
 
     public UsuarioAlunoGrad(int Id, String nome){
         this.Id = Id;

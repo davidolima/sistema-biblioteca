@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class UsuarioProfessor extends UsuarioBase implements IObservador {
-    public int maxEmprestimosEmAberto;
     public ArrayList<IObservavel> livrosObservados = new ArrayList<IObservavel>();
     public int notificacoes = 0;
 

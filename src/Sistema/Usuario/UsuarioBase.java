@@ -4,16 +4,18 @@ import Sistema.Emprestimo;
 import Sistema.Exemplar;
 import Sistema.Livro;
 import Sistema.Logger;
+import Sistema.Usuario.Strategy.IElegibilidade;
 
 import java.util.ArrayList;
 
 public abstract class UsuarioBase {
     public int Id;
     public String nome;
-
     public int prioridade;
     public int maxTempoEmprestimoDias;
+    public int maxEmprestimosEmAberto;
     public ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+    public IElegibilidade elegibilidade;
 
     public boolean isDevedor(){
         for (Emprestimo emprestimo : this.emprestimos){
@@ -25,13 +27,13 @@ public abstract class UsuarioBase {
     }
 
     public boolean isElegivelEmprestimo(Livro livro) {
-        return !isDevedor() && (livro != null);
+        return elegibilidade.isElegivelEmprestimo(livro, this);
     }
 
     public boolean pegarEmprestimo(Livro livro) {
         assert livro != null;
         if (!this.isElegivelEmprestimo(livro)) {
-            Logger.logFalha("Usuario`" + this.getNome() +"` nao e elegivel para pegar um emprestimo.");
+            Logger.logFalha("Usuario `" + this.getNome() +"` nao e elegivel para pegar um emprestimo.");
             return false;
         }
 
