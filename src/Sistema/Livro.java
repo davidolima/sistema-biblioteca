@@ -1,37 +1,28 @@
+package Sistema;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
-public class Livro {
-    public static int idCounter = -1;
-
+public class Livro extends ObservavelBase{
     public int id;
     public String titulo;
     public String editora;
     public int edicao;
     public int anoPublicacao;
     public String autores[];
-    public ArrayList<Exemplar> exemplares;
+    public ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
 
-    public static int increaseID(){
-        Livro.idCounter += 1;
-        return Livro.idCounter;
-    }
-
-    public Livro (int id, String titulo, int edicao, String editora, int anoPublicacao, String autores[]){
+    public Livro (int id, String titulo, int edicao, String editora, int anoPublicacao, String autores[]) {
         this.id = id;
         this.titulo = titulo;
         this.edicao = edicao;
         this.editora = editora;
         this.anoPublicacao = anoPublicacao;
         this.autores = autores;
-        this.exemplares = new ArrayList<Exemplar>();
-    }
-
-    public Livro (String titulo, int edicao, String editora, int anoPublicacao, String autores[]){
-        this(increaseID(), titulo, edicao, editora, anoPublicacao, autores);
     }
 
     public void adicionarExemplar() {
-        Exemplar newExemplar = new Exemplar();
+        Exemplar newExemplar = new Exemplar(this.id);
         this.exemplares.add(newExemplar);
     }
 
@@ -43,13 +34,13 @@ public class Livro {
         }
     }
 
-    public boolean isThereExemplarAvailable(){
+    public Exemplar getExemplarDisponivel() {
         for (Exemplar exemplar : this.exemplares) {
             if (exemplar.isDisponivel()){
-                return true;
+                return exemplar;
             }
         }
-        return false;
+        return null;
     }
 
     public int getId() {

@@ -1,5 +1,8 @@
+package Sistema;
+
 public enum StatusExemplar {
+    INDISPONIVEL,
     DISPONIVEL,
-    ALUGADO,
+    EMPRESTADO,
     RESERVADO,
 }
