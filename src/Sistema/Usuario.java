@@ -23,28 +23,32 @@ public abstract class Usuario {
         return !this.isDevedor();
     }
 
-    public String pegarEmprestimo(Livro livro) {
+    public boolean pegarEmprestimo(Livro livro) {
         if (!this.isElegivelEmprestimo()) {
-            return "Usuario`" + this.getNome() +"`nao e elefivel para pegar um emprestimo."; // TODO: Notificar sistema da falha.
+            Logger.logFalha("Usuario`" + this.getNome() +"`nao e elegivel para pegar um emprestimo.");
+            return false;
         }
         Exemplar exemplar = livro.getExemplarDisponivel();
         if (exemplar == null) {
-            return "Nao existe exemplares disponiveis para o livro `" + livro.getTitulo() + "`.";
+            Logger.logFalha("Nao existe exemplares disponiveis para o livro `" + livro.getTitulo() + "`.");
+            return false;
         }
 
         Emprestimo emprestimo = new Emprestimo(this, exemplar);
         this.emprestimos.add(emprestimo);
-        return "Usuario `" + this.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.";
-        // TODO: Notificar sistema do sucesso.
+        Logger.logFalha("Usuario `" + this.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
+        return true;
     }
 
-    public String devolverEmprestimo(Livro livro){
+    public boolean devolverEmprestimo(Livro livro){
         Emprestimo emprestimo = buscarEmprestimoPorCodigoLivro(livro.getId());
         if (emprestimo == null) {
-            return "Usuario `" + getNome() + "` nao apresenta emprestimos para o livro `" + livro.getTitulo() + "`.";
+            Logger.logFalha("Usuario `" + getNome() + "` nao apresenta emprestimos para o livro `" + livro.getTitulo() + "`.");
+            return false;
         }
         emprestimo.finalizar();
-        return "Usuario `" + getNome() + "` devolveu o livro `" + livro.getTitulo() + "` com sucesso.";
+        Logger.logSucesso("Usuario `" + getNome() + "` devolveu o livro `" + livro.getTitulo() + "` com sucesso.");
+        return true;
     };
 
     public Emprestimo buscarEmprestimoPorCodigoLivro(int codigoLivro){
@@ -54,6 +58,16 @@ public abstract class Usuario {
             }
         }
         return null;
+    }
+
+    public void imprimirInfo(){
+        Logger.logInfo("Informações do Usuário #" + getId() + " - " + getNome());
+        Logger.logInfo("  ID: " + getId());
+        Logger.logInfo("  Nome: " + getNome());
+        Logger.logInfo("Emprestimos Realizados:");
+        for (Emprestimo emprestimo : emprestimos) {
+            Logger.logInfo("  " + emprestimo.toString()); // TODO: Alterar para ficar conforme roteiro.
+        }
     }
 
     public int getTempoEmprestimoDias() {

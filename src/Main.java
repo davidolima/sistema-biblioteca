@@ -2,8 +2,8 @@ import Sistema.*;
 
 public class Main {
     public static void main(String args[]){
-        Sistema sys = new Sistema();
-        Repositorio repo = new Repositorio();
+        Sistema sys = Sistema.getInstancia();
+        Repositorio repo = Repositorio.getInstancia();
 
         Livro l1 = new Livro(100,"Engenharia de Software", 6, "AddisonWesley", 2000, new String[]{"Ian Sommervile"});
         l1.adicionarExemplar();
@@ -16,6 +16,7 @@ public class Main {
         repo.addUsuario(grad1);
         repo.addUsuario(grad2);
 
+        sys.executarComando("liv", new String[] {"100"});
         // Livro l2 = new Livro(titulo, edicao, anoPublicacao, autores);
         // Livro l3 = new Livro(titulo, edicao, anoPublicacao, autores);
         // Livro l4 = new Livro(titulo, edicao, anoPublicacao, autores);

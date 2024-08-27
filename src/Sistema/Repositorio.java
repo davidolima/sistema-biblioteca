@@ -19,7 +19,8 @@ public class Repositorio {
     public void addUsuario(Usuario usuario) {
         Usuario usuarioExistente = buscaUsuarioPorCodigo(usuario.getId());
         if (usuarioExistente != null) {
-            System.out.println("Usuario de codigo `" + usuario.getId() +"` ja existe no sistema.");
+            Logger.logAviso("Usuario de codigo `" + usuario.getId() +"` ja existe no sistema.");
+            return;
         }
         this.usuarios.add(usuario);
     }

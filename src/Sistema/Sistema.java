@@ -4,7 +4,7 @@ import Command.*;
 import java.util.HashMap;
 
 public class Sistema {
-    private Sistema instance;
+    private static Sistema instance;
     private HashMap<String, Command> comandos = new HashMap<String, Command>();
 
     public Sistema() {
@@ -21,12 +21,12 @@ public class Sistema {
         this.comandos.put("ntf", new ConsultarUsuarioCommand());
     }
 
-    public void executarComando(String strCmd, Argumentos args) {
+    public void executarComando(String strCmd, String[] args) {
         Command cmd = this.comandos.get(strCmd);
         cmd.run(args);
     }
 
-    public Sistema getInstance() {
+    public static Sistema getInstancia() {
         if (instance == null) { instance = new Sistema(); }
         return instance;
     }
