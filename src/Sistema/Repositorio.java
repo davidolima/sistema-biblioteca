@@ -19,6 +19,15 @@ public class Repositorio {
         Livro l400 = new Livro(400,"Design Patterns: Elements of Reusable Object-Oriented Software", 1, "Addison-Wesley Professional", 1994, new String[]{"Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides"});
         Livro l401 = new Livro(401,"UML Distilled: A Brief Guide to the Standard Object Modeling Language", 3, "Addison-Wesley Professional", 2003, new String[]{"Martin Fowler"});
 
+        addLivro(l100);
+        addLivro(l101);
+        addLivro(l200);
+        addLivro(l201);
+        addLivro(l300);
+        addLivro(l301);
+        addLivro(l400);
+        addLivro(l401);
+
         // Adicionar exemplares
         addLivro(l100);
         addLivro(l100);
@@ -40,8 +49,10 @@ public class Repositorio {
     public void addLivro(Livro livro) {
         Livro livroExistente = buscaLivroPorCodigo(livro.getId());
         if (livroExistente != null) {
+            Logger.logDebug("Novo exemplar do livro " + livro.getTitulo() + "(#" + livro.getId() + ")");
             livroExistente.adicionarExemplar();
         } else {
+            Logger.logDebug("Novo livro cadastrado: " + livro.getTitulo() + "(#"+livro.getId()+")");
             livros.add(livro);
         }
     }
