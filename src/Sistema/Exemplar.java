@@ -27,7 +27,7 @@ public class Exemplar {
     }
 
     public boolean isDisponivel(){
-        return (this.status == StatusExemplar.DISPONIVEL);
+        return (this.status != StatusExemplar.EMPRESTADO && this.status != StatusExemplar.INDISPONIVEL);
     }
 
     public boolean isReservado(){

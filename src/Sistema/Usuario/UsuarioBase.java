@@ -24,24 +24,25 @@ public abstract class UsuarioBase {
         return false;
     }
 
-    public boolean isElegivelEmprestimo() {
-        return !this.isDevedor();
+    public boolean isElegivelEmprestimo(Livro livro) {
+        return !isDevedor() && (livro != null);
     }
 
     public boolean pegarEmprestimo(Livro livro) {
-        if (!this.isElegivelEmprestimo()) {
-            Logger.logFalha("Usuario`" + this.getNome() +"`nao e elegivel para pegar um emprestimo.");
-            return false;
-        }
-        Exemplar exemplar = livro.getExemplarDisponivel();
-        if (exemplar == null) {
-            Logger.logFalha("Nao existe exemplares disponiveis para o livro `" + livro.getTitulo() + "`.");
+        assert livro != null;
+        if (!this.isElegivelEmprestimo(livro)) {
+            Logger.logFalha("Usuario`" + this.getNome() +"` nao e elegivel para pegar um emprestimo.");
             return false;
         }
 
-        Emprestimo emprestimo = new Emprestimo(this, exemplar);
+        Exemplar exemplar = livro.pegarExemplarEmprestado();
+        if (exemplar == null) {
+            return false;
+        }
+
+        Emprestimo emprestimo = new Emprestimo(this, livro, exemplar);
         this.emprestimos.add(emprestimo);
-        Logger.logFalha("Usuario `" + this.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
+        Logger.logSucesso("Usuario `" + this.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
         return true;
     }
 

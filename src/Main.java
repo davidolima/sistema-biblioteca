@@ -8,7 +8,7 @@ public class Main {
         Sistema sistema = Sistema.getInstancia();
         Repositorio repo = Repositorio.getInstancia();
 
-        sistema.toggleDebug();
+        //sistema.toggleDebug();
         repo.carregarDadosDeTeste();
 
         Scanner input = new Scanner(System.in);

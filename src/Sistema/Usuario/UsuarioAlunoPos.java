@@ -1,5 +1,7 @@
 package Sistema.Usuario;
 
+import Sistema.Livro;
+
 public class UsuarioAlunoPos extends UsuarioBase {
     public int maxEmprestimosEmAberto;
 
@@ -12,7 +14,10 @@ public class UsuarioAlunoPos extends UsuarioBase {
     }
 
     @Override
-    public boolean isElegivelEmprestimo() {
-        return super.isElegivelEmprestimo();
+    public boolean isElegivelEmprestimo(Livro livro) {
+        boolean naoEstaDevendo = !isDevedor();
+        boolean limEmprestimoNaoExcedido = (this.emprestimos.size() < maxEmprestimosEmAberto);
+        boolean jaTemExemplar = (this.buscarEmprestimoPorCodigoLivro(livro.getId()) == null);
+        return naoEstaDevendo && limEmprestimoNaoExcedido && jaTemExemplar;
     }
 }
