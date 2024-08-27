@@ -1,10 +1,12 @@
 package Sistema;
 
+import Sistema.Usuario.UsuarioBase;
+
 import java.util.ArrayList;
 
 public class Repositorio {
     public static Repositorio instancia;
-    private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    private ArrayList<UsuarioBase> usuarios = new ArrayList<UsuarioBase>();
     private ArrayList<Livro> livros = new ArrayList<Livro>();
 
     public void addLivro(Livro livro) {
@@ -16,8 +18,8 @@ public class Repositorio {
         }
     }
 
-    public void addUsuario(Usuario usuario) {
-        Usuario usuarioExistente = buscaUsuarioPorCodigo(usuario.getId());
+    public void addUsuario(UsuarioBase usuario) {
+        UsuarioBase usuarioExistente = buscaUsuarioPorCodigo(usuario.getId());
         if (usuarioExistente != null) {
             Logger.logAviso("Usuario de codigo `" + usuario.getId() +"` ja existe no sistema.");
             return;
@@ -34,8 +36,8 @@ public class Repositorio {
         return null;
     }
 
-    public Usuario buscaUsuarioPorCodigo(int codUsuario) {
-        for (Usuario usuario : usuarios) {
+    public UsuarioBase buscaUsuarioPorCodigo(int codUsuario) {
+        for (UsuarioBase usuario : usuarios) {
             if (usuario.getId() == codUsuario) {
                 return usuario;
             }

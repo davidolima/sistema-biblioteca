@@ -3,7 +3,7 @@ import Sistema.Repositorio;
 import Sistema.Livro;
 import Sistema.Logger;
 
-public class ConsultarLivroCommand implements Command {
+public class CommandConsultarLivro implements Command {
     @Override
     public boolean run(String[] args){
         int codLivro = Integer.parseInt(args[0]);

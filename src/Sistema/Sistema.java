@@ -12,13 +12,13 @@ public class Sistema {
     }
 
     private void initComandos() {
-        this.comandos.put("emp", new EmprestarCommand());
-        this.comandos.put("dev", new DevolverCommand());
-        this.comandos.put("res", new ReservarCommand());
-        this.comandos.put("usu", new ConsultarUsuarioCommand());
-        this.comandos.put("liv", new ConsultarLivroCommand());
-        this.comandos.put("obs", new ObservarCommand());
-        this.comandos.put("ntf", new ConsultarUsuarioCommand());
+        this.comandos.put("emp", new CommandEmprestar());
+        this.comandos.put("dev", new CommandDevolver());
+        this.comandos.put("res", new CommandReservar());
+        this.comandos.put("usu", new CommandConsultarUsuario());
+        this.comandos.put("liv", new CommandConsultarLivro());
+        this.comandos.put("obs", new CommandObservar());
+        this.comandos.put("ntf", new CommandConsultarUsuario());
     }
 
     public void executarComando(String strCmd, String[] args) {

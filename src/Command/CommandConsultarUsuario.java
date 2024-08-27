@@ -1,14 +1,14 @@
 package Command;
 import Sistema.Logger;
 import Sistema.Repositorio;
-import Sistema.Usuario;
+import Sistema.Usuario.UsuarioBase;
 
-public class ConsultarUsuarioCommand implements Command {
+public class CommandConsultarUsuario implements Command {
     @Override
     public boolean run(String[] args) {
         int codUsuario = Integer.parseInt(args[0]);
         Repositorio repo = Repositorio.getInstancia();
-        Usuario usuario = repo.buscaUsuarioPorCodigo(codUsuario);
+        UsuarioBase usuario = repo.buscaUsuarioPorCodigo(codUsuario);
         if (usuario == null) {
             Logger.logFalha("Nao existe usuario de codigo `" + codUsuario + "`.");
             return false;

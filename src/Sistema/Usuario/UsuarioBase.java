@@ -1,14 +1,19 @@
-package Sistema;
+package Sistema.Usuario;
+
+import Sistema.Emprestimo;
+import Sistema.Exemplar;
+import Sistema.Livro;
+import Sistema.Logger;
 
 import java.util.ArrayList;
 
-public abstract class Usuario {
+public abstract class UsuarioBase {
     public int Id;
     public String nome;
-    public int tempoEmprestimoDias;
-    public ArrayList<Emprestimo> emprestimos;
+
     public int prioridade;
-    //public EmprestimoStrategy emprestimoStrategy;
+    public int maxTempoEmprestimoDias;
+    public ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 
     public boolean isDevedor(){
         for (Emprestimo emprestimo : this.emprestimos){

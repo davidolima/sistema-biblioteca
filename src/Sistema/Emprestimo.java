@@ -1,15 +1,17 @@
 package Sistema;
 
+import Sistema.Usuario.UsuarioBase;
+
 import java.time.LocalDate;
 
 public class Emprestimo {
-    public Usuario usuario;
+    public UsuarioBase usuario;
     public Exemplar exemplar; // interface IEmprestavel?
     public LocalDate inicio;
     public LocalDate fim;
     public StatusEmprestimo status;
 
-    public Emprestimo(Usuario usuario, Exemplar exemplar){
+    public Emprestimo(UsuarioBase usuario, Exemplar exemplar){
         this.usuario = usuario;
         this.exemplar = exemplar;
 
@@ -27,7 +29,7 @@ public class Emprestimo {
         return false;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioBase getUsuario() {
         return usuario;
     }
 

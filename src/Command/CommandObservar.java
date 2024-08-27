@@ -1,8 +1,6 @@
 package Command;
-
 import Sistema.Logger;
-
-public class ReservarCommand implements Command {
+public class CommandObservar implements Command {
     @Override
     public boolean run(String[] args){
         // TODO

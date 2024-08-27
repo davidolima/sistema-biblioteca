@@ -2,16 +2,16 @@ package Command;
 import Sistema.Logger;
 import Sistema.Repositorio;
 import Sistema.Livro;
-import Sistema.Usuario;
+import Sistema.Usuario.UsuarioBase;
 
-public class DevolverCommand implements Command {
+public class CommandDevolver implements Command {
     @Override
     public boolean run(String[] args){
         int codUsuario = Integer.parseInt(args[0]);
         int codLivro = Integer.parseInt(args[1]);
         Repositorio repo = Repositorio.getInstancia();
 
-        Usuario usuario = repo.buscaUsuarioPorCodigo(codUsuario);
+        UsuarioBase usuario = repo.buscaUsuarioPorCodigo(codUsuario);
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
 
         if (usuario == null) {
