@@ -15,7 +15,7 @@ public abstract class UsuarioBase {
     public int maxTempoEmprestimoDias;
     public int maxEmprestimosEmAberto;
     public ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-    public IElegibilidade elegibilidade;
+    private IElegibilidade elegibilidade;
 
     public boolean isDevedor(){
         for (Emprestimo emprestimo : this.emprestimos){
