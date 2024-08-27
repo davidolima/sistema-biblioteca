@@ -15,18 +15,15 @@ public class CommandEmprestar implements Command {
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
 
         if (usuario == null) {
-            Logger.logFalha("Nao existe usuario de codigo `" + codUsuario + "`");
-            return false;
+            return Logger.logErroObjNaoExiste("usuario", codUsuario);
         }
         if (livro == null) {
-            Logger.logFalha("Nao existe livro de codigo `" + codLivro + "`");
-            return false;
+            return Logger.logErroObjNaoExiste("livro", codLivro);
         }
         if (!usuario.pegarEmprestimo(livro)) {
             return false;
         }
-        Logger.logDebug("Qtd Livros Indisp:"+livro.getContagemExemplaresIndisponiveis());
-        Logger.logSucesso("Usuario `" + usuario.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
-        return true;
+
+        return Logger.logSucesso("Usuario `" + usuario.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
     }
 }

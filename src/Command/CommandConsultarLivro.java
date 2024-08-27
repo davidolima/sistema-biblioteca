@@ -10,8 +10,7 @@ public class CommandConsultarLivro implements Command {
         Repositorio repo = Repositorio.getInstancia();
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
         if (livro == null) {
-            Logger.logFalha("Nao existe livro de codigo `" + codLivro + "`.");
-            return false;
+            return Logger.logErroObjNaoExiste("livro", codLivro);
         }
         livro.imprimirInfo();
         return true;

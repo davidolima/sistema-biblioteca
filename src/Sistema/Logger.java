@@ -1,14 +1,16 @@
 package Sistema;
 
 public class Logger { //TODO: Mover falhas repetidas para métodos do logger.
-    public static void logFalha(String message){
+    public static boolean logFalha(String message){
         System.out.println("[FALHA] " + message);
+        return false;
     }
     public static void logAviso(String message){
-        System.out.println("[AVISO] " + message);
+        System.out.println("[!] " + message);
     }
-    public static void logSucesso(String message){
+    public static boolean logSucesso(String message){
         System.out.println("[SUCESSO] " + message);
+        return true;
     }
     public static void logInfo(String message){
         System.out.println("[INFO] " + message);
@@ -21,5 +23,8 @@ public class Logger { //TODO: Mover falhas repetidas para métodos do logger.
         if (Sistema.getInstancia().isDebugging()){
             System.out.println("[DEBUG] " + message);
         }
+    }
+    public static boolean logErroObjNaoExiste(String strObj, int codObjeto) {
+        return Logger.logFalha("Nao existe " + strObj + " de codigo `" + codObjeto + "`.");
     }
 }

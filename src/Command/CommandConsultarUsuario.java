@@ -10,8 +10,7 @@ public class CommandConsultarUsuario implements Command {
         Repositorio repo = Repositorio.getInstancia();
         UsuarioBase usuario = repo.buscaUsuarioPorCodigo(codUsuario);
         if (usuario == null) {
-            Logger.logFalha("Nao existe usuario de codigo `" + codUsuario + "`.");
-            return false;
+            return Logger.logErroObjNaoExiste("usuário", codUsuario);
         }
         usuario.imprimirInfo();
         return true;
