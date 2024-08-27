@@ -1,6 +1,6 @@
-package SistemaPkg;
+package Sistema;
 
-import CommandPkg.*;
+import Command.*;
 import java.util.HashMap;
 
 public class Sistema {

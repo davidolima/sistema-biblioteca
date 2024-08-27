@@ -1,8 +1,9 @@
-package SistemaPkg;
+package Sistema;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
-public class Livro {
+public class Livro extends ObservavelBase{
     public int id;
     public String titulo;
     public String editora;
@@ -21,7 +22,7 @@ public class Livro {
     }
 
     public void adicionarExemplar() {
-        Exemplar newExemplar = new Exemplar();
+        Exemplar newExemplar = new Exemplar(this.id);
         this.exemplares.add(newExemplar);
     }
 
@@ -33,13 +34,13 @@ public class Livro {
         }
     }
 
-    public boolean isThereExemplarAvailable(){
+    public Exemplar getExemplarDisponivel() {
         for (Exemplar exemplar : this.exemplares) {
             if (exemplar.isDisponivel()){
-                return true;
+                return exemplar;
             }
         }
-        return false;
+        return null;
     }
 
     public int getId() {

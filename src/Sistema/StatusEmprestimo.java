@@ -1,4 +1,4 @@
-package SistemaPkg;
+package Sistema;
 
 public enum StatusEmprestimo{
     FINALIZADO,

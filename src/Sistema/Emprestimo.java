@@ -1,4 +1,4 @@
-package SistemaPkg;
+package Sistema;
 
 import java.time.LocalDate;
 
@@ -12,6 +12,8 @@ public class Emprestimo {
     public Emprestimo(Usuario usuario, Exemplar exemplar){
         this.usuario = usuario;
         this.exemplar = exemplar;
+
+        exemplar.pegarEmprestado();
 
         this.inicio = LocalDate.now();
         this.fim = inicio.plusDays(usuario.getTempoEmprestimoDias());
@@ -33,8 +35,8 @@ public class Emprestimo {
         return exemplar;
     }
 
-    public int getExemplarId(){
-        return exemplar.getId();
+    public int getLivroId(){
+        return exemplar.getLivroId();
     }
 
     public void setExemplar(Exemplar newExemplar) {
@@ -54,6 +56,7 @@ public class Emprestimo {
     }
 
     public void finalizar() {
+        this.exemplar.devolver();
         this.status = StatusEmprestimo.FINALIZADO;
     }
 }

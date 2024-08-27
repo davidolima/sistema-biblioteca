@@ -1,6 +1,6 @@
-package CommandPkg;
-import SistemaPkg.Repositorio;
-import SistemaPkg.Usuario;
+package Command;
+import Sistema.Repositorio;
+import Sistema.Usuario;
 
 public class ConsultarUsuarioCommand implements Command {
     @Override

@@ -1,4 +1,4 @@
-package SistemaPkg;
+package Sistema;
 
 public class Factory{
     public static Livro criarLivro(int id, String titulo, int edicao, String editora, int anoPublicacao, String autores[]){
