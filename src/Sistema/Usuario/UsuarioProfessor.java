@@ -1,7 +1,15 @@
 package Sistema.Usuario;
+import Sistema.IObservador;
+import Sistema.IObservavel;
+import Sistema.Livro;
 
-public class UsuarioProfessor extends UsuarioBase {
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class UsuarioProfessor extends UsuarioBase implements IObservador {
     public int maxEmprestimosEmAberto;
+    public ArrayList<IObservavel> livrosObservados = new ArrayList<IObservavel>();
+    public int notificacoes = 0;
 
     public UsuarioProfessor(int Id, String nome){
         this.Id = Id;
@@ -11,8 +19,11 @@ public class UsuarioProfessor extends UsuarioBase {
         this.maxEmprestimosEmAberto = 3;
     }
 
-    @Override
-    public boolean isElegivelEmprestimo() {
-        return super.isElegivelEmprestimo();
+    public int getNotificacoes() {
+        return notificacoes;
+    }
+
+    public void atualizar() {
+        this.notificacoes++;
     }
 }

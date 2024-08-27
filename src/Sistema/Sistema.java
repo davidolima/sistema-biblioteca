@@ -19,7 +19,7 @@ public class Sistema {
         this.comandos.put("usu", new CommandConsultarUsuario());
         this.comandos.put("liv", new CommandConsultarLivro());
         this.comandos.put("obs", new CommandObservar());
-        this.comandos.put("ntf", new CommandConsultarUsuario());
+        this.comandos.put("ntf", new CommandNotificacoes());
     }
 
     public void executarComando(String strCmd, String[] args) {
