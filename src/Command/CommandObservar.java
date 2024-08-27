@@ -7,29 +7,26 @@ import Sistema.Usuario.UsuarioProfessor;
 public class CommandObservar implements Command {
     @Override
     public boolean run(String[] args){
-        int idUsuario = Integer.parseInt(args[0]);
-        int idLivro = Integer.parseInt(args[1]);
+        int codUsuario = Integer.parseInt(args[0]);
+        int codLivro = Integer.parseInt(args[1]);
         Repositorio repo = Repositorio.getInstancia();
 
-        UsuarioProfessor usuario = (UsuarioProfessor) repo.buscaUsuarioPorCodigo(idUsuario);
+        UsuarioProfessor usuario = (UsuarioProfessor) repo.buscaUsuarioPorCodigo(codUsuario);
         if (usuario == null) {
-            Logger.logFalha("Nao existe usuario de codigo `" + idUsuario + "`");
-            return false;
+            return Logger.logErroObjNaoExiste("usuario", codUsuario);
         }
 
-        Livro livro = repo.buscaLivroPorCodigo(idLivro);
+        Livro livro = repo.buscaLivroPorCodigo(codLivro);
         if (livro == null) {
-            Logger.logFalha("Nao existe livro de codigo `" + idLivro + "`");
-            return false;
+            return Logger.logErroObjNaoExiste("livro", codLivro);
         }
 
+        // Se o usuário já está observando aquele livro, deixar de observar.
         if (livro.buscarObservador(usuario) != null){
             livro.removerObservador(usuario);
-            Logger.logSucesso("Usuário `" + usuario.getNome() + "` (#" + usuario.getId() + ") não está mais observando o livro `" + livro.getTitulo() + "` (#" + livro.getId() +").");
-        } else {
-            livro.adicionarObservador(usuario);
-            Logger.logSucesso("Usuário `" + usuario.getNome() + "` (#" + usuario.getId() + ") agora está observando o livro `" + livro.getTitulo() + "` (#" + livro.getId() +").");
+            return Logger.logSucesso("Usuário `" + usuario.getNome() + "` (#" + usuario.getId() + ") não está mais observando o livro `" + livro.getTitulo() + "` (#" + livro.getId() +").");
         }
-        return true;
+        livro.adicionarObservador(usuario);
+        return Logger.logSucesso("Usuário `" + usuario.getNome() + "` (#" + usuario.getId() + ") agora está observando o livro `" + livro.getTitulo() + "` (#" + livro.getId() +").");
     }
 }

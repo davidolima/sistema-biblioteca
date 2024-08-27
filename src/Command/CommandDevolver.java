@@ -15,16 +15,13 @@ public class CommandDevolver implements Command {
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
 
         if (usuario == null) {
-            Logger.logFalha("Nao existe usuario de codigo `" + codUsuario + "`.");
-            return false;
+            return Logger.logErroObjNaoExiste("usuário", codUsuario);
         }
         if (livro == null) {
-            Logger.logFalha("Nao existe livro de codigo `" + codLivro + "`.");
-            return false;
+            return Logger.logErroObjNaoExiste("livro", codUsuario);
         }
 
         usuario.devolverEmprestimo(livro);
-        Logger.logSucesso("Usuario `" + usuario.getNome() + "` devolveu seu exemplar do livro `" + livro.getTitulo() + "` com sucesso.");
-        return true;
+        return Logger.logSucesso("Usuario `" + usuario.getNome() + "` devolveu seu exemplar do livro `" + livro.getTitulo() + "` com sucesso.");
     }
 }
