@@ -71,10 +71,15 @@ public class Livro implements IObservavel {
         return contagem;
     }
 
-    public boolean adicionarReserva(UsuarioBase user) {
+    public boolean estaReservando(UsuarioBase user){
         for (UsuarioBase reservando : this.reservandos){
-            if (reservando == user) return false;
+            if (reservando == user) return true;
         }
+        return false;
+    }
+
+    public boolean adicionarReserva(UsuarioBase user) {
+        if (estaReservando(user)) return false;
         reservandos.add(user);
         return true;
     }
@@ -87,8 +92,8 @@ public class Livro implements IObservavel {
         }
     }
 
-    public boolean maisReservasQueExemplares(){
-        return reservandos.size() >= exemplares.size();
+    public boolean menosReservasQueExemplares(){
+        return reservandos.size() < exemplares.size();
     }
 
     public void imprimirInfo(){
