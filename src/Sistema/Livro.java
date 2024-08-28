@@ -1,6 +1,6 @@
 package Sistema;
 
-import Sistema.Usuario.UsuarioProfessor;
+import Sistema.Usuario.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,7 @@ public class Livro implements IObservavel {
     public String autores[];
     public ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
     public ArrayList<IObservador> observadores = new ArrayList<IObservador>();
+    public ArrayList<UsuarioBase> reservandos = new ArrayList<UsuarioBase>();
 
     public Livro (int id, String titulo, int edicao, String editora, int anoPublicacao, String autores[]) {
         this.id = id;
@@ -28,7 +29,7 @@ public class Livro implements IObservavel {
         Exemplar exemplar = getExemplarDisponivel();
 
         if (exemplar == null) {
-            Logger.logFalha("O Livro `" + getTitulo() + "` (#" + getId() + ") " + "nao apresenta exemplares disponíveis.");
+            Logger.logFalha("O Livro `" + getTitulo() + "` (#" + getId() + ") nao apresenta exemplares disponíveis.");
             return null;
         }
 
@@ -70,10 +71,36 @@ public class Livro implements IObservavel {
         return contagem;
     }
 
+    public boolean adicionarReserva(UsuarioBase user) {
+        for (UsuarioBase reservando : this.reservandos){
+            if (reservando == user) return false;
+        }
+        reservandos.add(user);
+        return true;
+    }
+
+    public void finalizarReserva(UsuarioBase user) {
+        for (UsuarioBase reservando : this.reservandos){
+            if (reservando == user) {
+                reservandos.remove(reservando);
+            }
+        }
+    }
+
+    public boolean maisReservasQueExemplares(){
+        return reservandos.size() >= exemplares.size();
+    }
+
     public void imprimirInfo(){
         Logger.logInfo("Informações do Livro #" + getId() + ":");
         Logger.logInfo(" - Título: " + getTitulo());
-        //Logger.logInfo("  Qtd. Reservas:", getContagemExemplaresReservados()); // TODO
+        Logger.logInfo("  Qtd. Reservas: " + reservandos.size());
+        if (reservandos.size() > 0){
+            Logger.logInfo(" + Usuários reservando: ");
+            for (UsuarioBase reservando : this.reservandos){
+                Logger.logInfo("  - "+reservando.getNome());
+            }
+        }
         Logger.logInfo(" + Exemplares: ");
         for (Exemplar exemplar : this.exemplares){
             Logger.logInfo("  - "+exemplar.toString());

@@ -1,12 +1,29 @@
 package Command;
-
 import Sistema.Logger;
+import Sistema.Repositorio;
+import Sistema.Livro;
+import Sistema.Usuario.UsuarioBase;
 
 public class CommandReservar implements Command {
     @Override
     public boolean run(String[] args){
-        // TODO
-        Logger.logErroFatal("Not implemented yet.");
-        return false;
+        int codUsuario = Integer.parseInt(args[0]);
+        int codLivro = Integer.parseInt(args[1]);
+        Repositorio repo = Repositorio.getInstancia();
+
+        UsuarioBase usuario = repo.buscaUsuarioPorCodigo(codUsuario);
+        Livro livro = repo.buscaLivroPorCodigo(codLivro);
+
+        if (usuario == null) {
+            return Logger.logErroObjNaoExiste("usuario", codUsuario);
+        }
+        if (livro == null) {
+            return Logger.logErroObjNaoExiste("livro", codLivro);
+        }
+        if (!usuario.reservar(livro)) {
+            return false;
+        }
+        
+        return Logger.logSucesso("Usuario `" + usuario.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
     }
 }

@@ -4,6 +4,8 @@ import Sistema.Emprestimo;
 import Sistema.Exemplar;
 import Sistema.Livro;
 import Sistema.Logger;
+import Sistema.Reserva;
+import Sistema.StatusReserva;
 import Sistema.Usuario.Strategy.IElegibilidade;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public abstract class UsuarioBase {
 
         Emprestimo emprestimo = new Emprestimo(this, livro, exemplar);
         this.emprestimos.add(emprestimo);
+        finalizarReserva(livro);
        return true;
     }
 
@@ -56,7 +59,7 @@ public abstract class UsuarioBase {
         }
         emprestimo.finalizar();
         return true;
-    };
+    }
 
     public Emprestimo buscarEmprestimoPorCodigoLivro(int codigoLivro){
         for (Emprestimo emprestimo : emprestimos) {
@@ -67,6 +70,34 @@ public abstract class UsuarioBase {
         return null;
     }
 
+    public boolean reservar(Livro livro){
+        int qntReservasAbertas = 0;
+        for (Reserva reserva : reservas){
+            if (reserva.getStatus() == StatusReserva.EM_CURSO) qntReservasAbertas += 1;
+            if (qntReservasAbertas >= 3) {
+                Logger.logFalha("Usuario `" + this.getNome() +"` ja possui o numero maximo de reservas abertas, " +
+                "e portanto nao pode reservar o livro `" + livro.getTitulo() + "` (#" + livro.getId() + ") ");
+                return false;
+            }
+        }
+        if(!livro.adicionarReserva(this)){
+            Logger.logFalha("Usuario `" + this.getNome() +"` ja possui reserva aberta para o livro `" +
+            livro.getTitulo() + "` (#" + livro.getId() + ") ");
+            return false;
+        }
+        reservas.add(new Reserva(livro));
+        return true;
+    }
+
+    public void finalizarReserva(Livro livro){
+        for (Reserva reserva : reservas){
+            if (reserva.getLivro() == livro && reserva.getStatus() == StatusReserva.EM_CURSO){
+                reserva.finalizar();
+                livro.finalizarReserva(this);
+            }
+        }
+    }
+
     public void imprimirInfo(){
         Logger.logInfo("Informações do Usuário #" + getId() + " - `" + getNome() + "`:");
         Logger.logInfo("  ID: " + getId());
@@ -75,6 +106,11 @@ public abstract class UsuarioBase {
         for (Emprestimo emprestimo : emprestimos) {
             Logger.logInfo("  " + emprestimo.toString());
         }
+        Logger.logInfo("Reservas Realizadas:");
+        for (Reserva reserva : reservas) {
+            Logger.logInfo("  " + reserva.toString());
+        }
+
     }
 
     public int getTempoEmprestimoDias() {
