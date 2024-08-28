@@ -1,6 +1,6 @@
 package Command;
 
-import Sistema.IObservavel;
+//import Sistema.IObservavel;
 import Sistema.Logger;
 import Sistema.Repositorio;
 import Sistema.Usuario.UsuarioProfessor;

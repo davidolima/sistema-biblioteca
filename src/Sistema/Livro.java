@@ -3,7 +3,7 @@ package Sistema;
 import Sistema.Usuario.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 public class Livro implements IObservavel {
     public int id;
@@ -34,9 +34,11 @@ public class Livro implements IObservavel {
         }
 
         exemplar.pegarEmprestado();
+        /*
         if (this.getContagemExemplaresIndisponiveis() >= 2) {
             this.notificarObservadores();
         }
+        */
 
         return exemplar;
     }
@@ -63,6 +65,7 @@ public class Livro implements IObservavel {
         return null;
     }
 
+    /*
     public int getContagemExemplaresIndisponiveis(){
         int contagem = 0;
         for (Exemplar exemplar : this.exemplares){
@@ -70,6 +73,7 @@ public class Livro implements IObservavel {
         }
         return contagem;
     }
+    */
 
     public boolean estaReservando(UsuarioBase user){
         for (UsuarioBase reservando : this.reservandos){
