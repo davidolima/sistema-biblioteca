@@ -11,11 +11,12 @@ import java.util.ArrayList;
 public abstract class UsuarioBase {
     public int Id;
     public String nome;
-    public int prioridade;
+    //public int prioridade;
     public int maxTempoEmprestimoDias;
     public int maxEmprestimosEmAberto;
     public ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-    private IElegibilidade elegibilidade;
+    public ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+    public IElegibilidade elegibilidade;
 
     public boolean isDevedor(){
         for (Emprestimo emprestimo : this.emprestimos){
