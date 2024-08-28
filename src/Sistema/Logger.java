@@ -1,6 +1,6 @@
 package Sistema;
 
-public class Logger { //TODO: Mover falhas repetidas para métodos do logger.
+public class Logger {
     public static boolean logFalha(String message){
         System.out.println("[FALHA] " + message);
         return false;
