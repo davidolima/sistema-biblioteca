@@ -81,6 +81,9 @@ public class Livro implements IObservavel {
     public boolean adicionarReserva(UsuarioBase user) {
         if (estaReservando(user)) return false;
         reservandos.add(user);
+        if (this.reservandos.size() > 2) {
+            this.notificarObservadores();
+        }
         return true;
     }
 
