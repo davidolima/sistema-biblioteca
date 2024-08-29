@@ -47,6 +47,7 @@ public abstract class UsuarioBase {
 
         Emprestimo emprestimo = new Emprestimo(this, livro, exemplar);
         this.emprestimos.add(emprestimo);
+        exemplar.registrarEmprestimo(emprestimo);
         finalizarReserva(livro);
        return true;
     }

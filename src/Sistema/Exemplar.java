@@ -6,11 +6,12 @@ public class Exemplar {
     public int exemplarId;
     public int livroId;
     public StatusExemplar status;
+    public Emprestimo emprestimo = null;
 
     public Exemplar(int livroId){
         this.exemplarId = incrementarId();
         this.livroId = livroId;
-        this.status = StatusExemplar.DISPONIVEL; // TODO: Mudar para parâmetro que guarda quem pegou emprestado
+        this.status = StatusExemplar.DISPONIVEL;
     }
 
     public int incrementarId(){
@@ -30,7 +31,12 @@ public class Exemplar {
         return (getStatus() != StatusExemplar.EMPRESTADO);
     }
 
+    public void registrarEmprestimo(Emprestimo emp) {
+        this.emprestimo = emp;
+    }
+
     public void devolver() {
+        this.emprestimo = null;
         this.status = StatusExemplar.DISPONIVEL;
     }
     public void pegarEmprestado(){
@@ -38,8 +44,9 @@ public class Exemplar {
     }
 
     public String toString(){
-        if (getStatus() == StatusExemplar.EMPRESTADO){
-            return "Exemplar #" + getId() + " - " + "Em empréstimo (UsuarioQuePegouEmprestado) - Inicio: <inicio> Fim: <fim>"; // Fixme
+        if (this.emprestimo != null){
+            return "Exemplar #" + getId() + " - " + "Em empréstimo (" + this.emprestimo.getUsuario().getNome() +
+            ") - Inicio: " + this.emprestimo.getInicio() + " Fim: " + this.emprestimo.getFim(); 
         }
         return "Exemplar #" + getId() + " - " + getStatus();
     }
