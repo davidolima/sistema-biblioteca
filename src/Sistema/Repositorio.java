@@ -44,6 +44,8 @@ public class Repositorio {
         addUsuario(new UsuarioAlunoPos(456, "Luiz Fernando Rodrigues"));
         addUsuario(new UsuarioAlunoGrad(789, "Pedro Paulo"));
         addUsuario(new UsuarioProfessor(100, "Carlos Lucena"));
+
+        Logger.logAviso("Dados de teste carregados.");
     }
 
     public void addLivro(Livro livro) {

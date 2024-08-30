@@ -35,7 +35,6 @@ public abstract class UsuarioBase {
     public boolean pegarEmprestimo(Livro livro) {
         assert livro != null;
         if (!this.isElegivelEmprestimo(livro)) {
-            Logger.logFalha("Usuário `" + this.getNome() +"` não é elegível para pegar um empréstimo."); //TODO: Também retornar o motivo
             return false;
         }
 
@@ -54,8 +53,7 @@ public abstract class UsuarioBase {
     public boolean devolverEmprestimo(Livro livro){
         Emprestimo emprestimo = buscarEmprestimoPorCodigoLivro(livro.getId());
         if (emprestimo == null) {
-            Logger.logFalha("Usuário `" + getNome() + "` não apresenta empréstimos para o livro `" + livro.getTitulo() + "`.");
-            return false;
+            return Logger.logFalha("Usuário `" + getNome() + "` não apresenta empréstimos para o livro `" + livro.getTitulo() + "`.");
         }
         emprestimo.finalizar();
         return true;
@@ -75,15 +73,13 @@ public abstract class UsuarioBase {
         for (Reserva reserva : reservas){
             if (reserva.getStatus() == StatusReserva.EM_CURSO) qntReservasAbertas += 1;
             if (qntReservasAbertas >= 3) {
-                Logger.logFalha("Usuario `" + this.getNome() +"` ja possui o numero maximo de reservas abertas, " +
-                "e portanto nao pode reservar o livro `" + livro.getTitulo() + "` (#" + livro.getId() + ") ");
-                return false;
+                return Logger.logFalha("Usuario `" + this.getNome() +"` ja possui o numero maximo de reservas abertas, " +
+                        "e portanto nao pode reservar o livro `" + livro.getTitulo() + "` (#" + livro.getId() + ") ");
             }
         }
         if(!livro.adicionarReserva(this)){
-            Logger.logFalha("Usuario `" + this.getNome() +"` ja possui reserva aberta para o livro `" +
-            livro.getTitulo() + "` (#" + livro.getId() + ") ");
-            return false;
+            return Logger.logFalha("Usuario `" + this.getNome() +"` ja possui reserva aberta para o livro `" +
+                    livro.getTitulo() + "` (#" + livro.getId() + ") ");
         }
         reservas.add(new Reserva(livro));
         return true;
@@ -115,6 +111,9 @@ public abstract class UsuarioBase {
 
     public int getTempoEmprestimoDias() {
         return this.maxTempoEmprestimoDias;
+    }
+    public int getMaxEmprestimosEmAberto(){
+        return this.maxEmprestimosEmAberto;
     }
     public int getId() {
         return Id;

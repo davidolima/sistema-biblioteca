@@ -1,5 +1,7 @@
 package Sistema;
 
+import Sistema.Usuario.UsuarioBase;
+
 public class Logger {
     public static boolean logFalha(String message){
         System.out.println("[FALHA] " + message);
@@ -26,5 +28,8 @@ public class Logger {
     }
     public static boolean logErroObjNaoExiste(String strObj, int codObjeto) {
         return Logger.logFalha("Não existe " + strObj + " de código `" + codObjeto + "`.");
+    }
+    public static boolean logErroUsuarioNaoElegivel(UsuarioBase usuario, String motivo){
+        return Logger.logFalha("Usuário `" + usuario.getNome() + "` (#" + usuario.getId() +") não é elegível para um empréstimo: " + motivo);
     }
 }

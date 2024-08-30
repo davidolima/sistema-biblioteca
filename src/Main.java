@@ -4,11 +4,14 @@ import Sistema.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String args[]){
+    public static void main(String[] args){
         Sistema sistema = Sistema.getInstancia();
         Repositorio repo = Repositorio.getInstancia();
 
-        sistema.toggleDebug();
+        Logger.logInfo("Sistema de Biblioteca");
+        Logger.logInfo("Grupo: David Lima e João Soares");
+
+        //sistema.toggleDebug();
         repo.carregarDadosDeTeste();
 
         try (Scanner input = new Scanner(System.in)) {
@@ -25,8 +28,6 @@ public class Main {
                 sistema.executarComando("ntf", new String[]{"100"});
             }
 
-            Logger.logInfo("Sistema de Biblioteca");
-            Logger.logInfo("Grupo: David Lima e João Soares");
             boolean running = true;
             while (running){
                 System.out.print(" > ");
