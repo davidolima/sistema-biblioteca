@@ -22,6 +22,6 @@ public class CommandDevolver implements Command {
         }
 
         usuario.devolverEmprestimo(livro);
-        return Logger.logSucesso("Usuario `" + usuario.getNome() + "` devolveu seu exemplar do livro `" + livro.getTitulo() + "` com sucesso.");
+        return Logger.logSucesso("Usuário `" + usuario.getNome() + "` devolveu seu exemplar do livro `" + livro.getTitulo() + "` com sucesso.");
     }
 }

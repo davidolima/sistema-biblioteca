@@ -29,17 +29,11 @@ public class Livro implements IObservavel {
         Exemplar exemplar = getExemplarDisponivel();
 
         if (exemplar == null) {
-            Logger.logFalha("O Livro `" + getTitulo() + "` (#" + getId() + ") nao apresenta exemplares disponíveis.");
+            Logger.logFalha("O Livro `" + getTitulo() + "` (#" + getId() + ") não apresenta exemplares disponíveis.");
             return null;
         }
 
         exemplar.pegarEmprestado();
-        /*
-        if (this.getContagemExemplaresIndisponiveis() >= 2) {
-            this.notificarObservadores();
-        }
-        */
-
         return exemplar;
     }
 
@@ -64,16 +58,6 @@ public class Livro implements IObservavel {
         }
         return null;
     }
-
-    /*
-    public int getContagemExemplaresIndisponiveis(){
-        int contagem = 0;
-        for (Exemplar exemplar : this.exemplares){
-            contagem += exemplar.isDisponivel() ? 0 : 1;
-        }
-        return contagem;
-    }
-    */
 
     public boolean estaReservando(UsuarioBase user){
         for (UsuarioBase reservando : this.reservandos){

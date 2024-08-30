@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Emprestimo {
     public UsuarioBase usuario;
-    public Exemplar exemplar; // interface IEmprestavel?
+    public Exemplar exemplar;
     public Livro livro;
     public LocalDate inicio;
     public LocalDate fim;

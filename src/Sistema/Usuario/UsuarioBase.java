@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public abstract class UsuarioBase {
     public int Id;
     public String nome;
-    //public int prioridade;
     public int maxTempoEmprestimoDias;
     public int maxEmprestimosEmAberto;
     public ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
@@ -36,7 +35,7 @@ public abstract class UsuarioBase {
     public boolean pegarEmprestimo(Livro livro) {
         assert livro != null;
         if (!this.isElegivelEmprestimo(livro)) {
-            Logger.logFalha("Usuario `" + this.getNome() +"` nao e elegivel para pegar um emprestimo.");
+            Logger.logFalha("Usuário `" + this.getNome() +"` não é elegível para pegar um empréstimo."); //TODO: Também retornar o motivo
             return false;
         }
 
@@ -55,7 +54,7 @@ public abstract class UsuarioBase {
     public boolean devolverEmprestimo(Livro livro){
         Emprestimo emprestimo = buscarEmprestimoPorCodigoLivro(livro.getId());
         if (emprestimo == null) {
-            Logger.logFalha("Usuario `" + getNome() + "` nao apresenta emprestimos para o livro `" + livro.getTitulo() + "`.");
+            Logger.logFalha("Usuário `" + getNome() + "` não apresenta empréstimos para o livro `" + livro.getTitulo() + "`.");
             return false;
         }
         emprestimo.finalizar();

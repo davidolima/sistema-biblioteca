@@ -60,7 +60,7 @@ public class Repositorio {
     public void addUsuario(UsuarioBase usuario) {
         UsuarioBase usuarioExistente = buscaUsuarioPorCodigo(usuario.getId());
         if (usuarioExistente != null) {
-            Logger.logAviso("Usuario de codigo `" + usuario.getId() +"` ja existe no sistema.");
+            Logger.logAviso("Usuário de código `" + usuario.getId() +"` já existe no sistema.");
             return;
         }
         this.usuarios.add(usuario);

@@ -15,7 +15,7 @@ public class CommandReservar implements Command {
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
 
         if (usuario == null) {
-            return Logger.logErroObjNaoExiste("usuario", codUsuario);
+            return Logger.logErroObjNaoExiste("usuário", codUsuario);
         }
         if (livro == null) {
             return Logger.logErroObjNaoExiste("livro", codLivro);
@@ -24,6 +24,6 @@ public class CommandReservar implements Command {
             return false;
         }
         
-        return Logger.logSucesso("Usuario `" + usuario.getNome() + "` realizou um emprestimo do livro `" + livro.getTitulo() + "` com sucesso.");
+        return Logger.logSucesso("Usuário `" + usuario.getNome() + "` realizou um empréstimo do livro `" + livro.getTitulo() + "` com sucesso.");
     }
 }

@@ -14,7 +14,7 @@ public class CommandNotificacoes implements Command {
         // Conforme roteiro, não estamos verificando se o usuário é um professor.
         UsuarioProfessor usuario = (UsuarioProfessor) repo.buscaUsuarioPorCodigo(codUsuario);
         if (usuario == null) {
-            return Logger.logErroObjNaoExiste("usuario", codUsuario);
+            return Logger.logErroObjNaoExiste("usuário", codUsuario);
         }
 
         Logger.logInfo("Qtd. de notificações recebidas pelo usuário `" + usuario.getNome() +"` (#" + codUsuario + "): " + usuario.getNotificacoes());

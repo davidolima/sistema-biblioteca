@@ -7,7 +7,6 @@ public class UsuarioAlunoPos extends UsuarioBase {
     public UsuarioAlunoPos(int Id, String nome){
         this.Id = Id;
         this.nome = nome;
-        //this.prioridade = 0;
         this.maxTempoEmprestimoDias = 5;
         this.maxEmprestimosEmAberto = 4;
         this.elegibilidade = new ElegibilidadeAluno();

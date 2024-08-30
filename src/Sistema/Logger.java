@@ -25,6 +25,6 @@ public class Logger {
         }
     }
     public static boolean logErroObjNaoExiste(String strObj, int codObjeto) {
-        return Logger.logFalha("Nao existe " + strObj + " de codigo `" + codObjeto + "`.");
+        return Logger.logFalha("Não existe " + strObj + " de código `" + codObjeto + "`.");
     }
 }

@@ -13,7 +13,7 @@ public class CommandObservar implements Command {
 
         UsuarioProfessor usuario = (UsuarioProfessor) repo.buscaUsuarioPorCodigo(codUsuario);
         if (usuario == null) {
-            return Logger.logErroObjNaoExiste("usuario", codUsuario);
+            return Logger.logErroObjNaoExiste("usuário", codUsuario);
         }
 
         Livro livro = repo.buscaLivroPorCodigo(codLivro);
