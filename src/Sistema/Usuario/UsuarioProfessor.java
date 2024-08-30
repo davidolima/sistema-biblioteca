@@ -18,10 +18,6 @@ public class UsuarioProfessor extends UsuarioBase implements IObservador {
         this.elegibilidade = new ElegibilidadeProfessor();
     }
 
-    @Override
-    public boolean isElegivelEmprestimo(Livro livro) {
-        return elegibilidade.isElegivelEmprestimo(livro, this);
-    }
 
     public int getNotificacoes() {
         return notificacoes;

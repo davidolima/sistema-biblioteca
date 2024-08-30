@@ -12,8 +12,4 @@ public class UsuarioAlunoPos extends UsuarioBase {
         this.elegibilidade = new ElegibilidadeAluno();
     }
 
-    @Override
-    public boolean isElegivelEmprestimo(Livro livro) {
-        return elegibilidade.isElegivelEmprestimo(livro, this);
-    }
 }
