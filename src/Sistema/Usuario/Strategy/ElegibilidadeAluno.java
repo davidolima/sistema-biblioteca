@@ -23,7 +23,7 @@ public class ElegibilidadeAluno implements IElegibilidade {
             return Logger.logErroUsuarioNaoElegivel(user, "Usuário já apresenta empréstimo de exemplar deste livro.");
         }
         if(!livroEstaDisp && !temReserva){
-            return Logger.logErroUsuarioNaoElegivel(user, "Livro não existem exemplares disponíveis deste livro.");
+            return Logger.logErroUsuarioNaoElegivel(user, "Não existem exemplares disponíveis deste livro.");
         }
         return true;
     }
